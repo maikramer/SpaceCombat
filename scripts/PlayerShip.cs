@@ -4,7 +4,7 @@ using Godot;
 public class PlayerShip : Area2D {
     [Export] private float moveSpeed = 200f;
     [Export] private PackedScene projectile;
-    [Export] private int shotsPerSecond = 2;
+    [Export] private float shotsPerSecond = 2;
 
     private Vector2 shipSize;
     private float leftBound;
@@ -37,17 +37,19 @@ public class PlayerShip : Area2D {
         MoveShip (moveAmount);
 
         LimitToCorner ();
+        FireWeapon ();
+    }
 
+    private void FireWeapon () {
         if (Input.IsActionPressed ("fire") && elapsedTime > nextFire) {
             var proj = projectile.Instance () as Node2D;
-            var pos = proj.GlobalPosition;
-            pos.y = GlobalPosition.y - shipSize.y / 2;
-            pos.x = GlobalPosition.x;
-            proj.GlobalPosition = pos;
-            GetParent().AddChild (proj);
+            GetParent ().AddChild (proj);
+            var pos = proj.Position;
+            pos.y = Position.y - shipSize.y / 2f;
+            pos.x = Position.x;
+            proj.Position = pos;
             nextFire = elapsedTime + 1f / shotsPerSecond;
         }
-
     }
 
     private void LimitToCorner () {

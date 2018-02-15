@@ -1,9 +1,16 @@
-[gd_scene load_steps=3 format=2]
+[gd_scene load_steps=4 format=2]
 
-[ext_resource path="res://prefabs/Projectile.cs" type="Script" id=1]
+[ext_resource path="res://scripts/Projectile.cs" type="Script" id=1]
 [ext_resource path="res://sprites/HiDPI/missile1.png" type="Texture" id=2]
 
-[node name="Projectile" type="Area2D" index="0"]
+
+
+[sub_resource type="RectangleShape2D" id=1]
+
+custom_solver_bias = 0.0
+extents = Vector2( 10.474, 25.9109 )
+
+[node name="Projectile" type="Area2D"]
 
 input_pickable = true
 gravity_vec = Vector2( 0, 1 )
@@ -14,11 +21,16 @@ audio_bus_override = false
 audio_bus_name = "Master"
 script = ExtResource( 1 )
 _sections_unfolded = [ "Transform" ]
+speed = 200.0
 
 [node name="Sprite" type="Sprite" parent="." index="0"]
 
 scale = Vector2( 0.5, 0.5 )
 texture = ExtResource( 2 )
 _sections_unfolded = [ "Transform" ]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." index="1"]
+
+shape = SubResource( 1 )
 
 
