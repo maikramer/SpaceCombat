@@ -3,6 +3,8 @@ using Godot;
 
 public class PlayerShip : Area2D {
     [Export] private float moveSpeed = 200f;
+    [Export] private PackedScene projectile;
+    [Export] private int shotsPerSecond = 2;
 
     private Vector2 shipSize;
     private float leftBound;
@@ -20,18 +22,35 @@ public class PlayerShip : Area2D {
 
         leftBound = shipSize.x / 2;
         rightBound = GetViewportRect ().Size.x - shipSize.x / 2;
+
+        if (!(projectile.Instance () is Node2D)) {
+            GD.Print ("Projetil invalido");
+        }
     }
 
+    private float nextFire = 0;
+    private float elapsedTime = 0;
     public override void _Process (float delta) {
-        float moveAmount = moveSpeed * delta;
+        elapsedTime += delta;
 
-        if (Input.IsActionPressed ("left")) {
-            Translate (new Vector2 (-moveAmount, 0));
-        } else if (Input.IsActionPressed ("right")) {
-            Translate (new Vector2 (moveAmount, 0));
+        float moveAmount = moveSpeed * delta;
+        MoveShip (moveAmount);
+
+        LimitToCorner ();
+
+        if (Input.IsActionPressed ("fire") && elapsedTime > nextFire) {
+            var proj = projectile.Instance () as Node2D;
+            var pos = proj.GlobalPosition;
+            pos.y = GlobalPosition.y - shipSize.y / 2;
+            pos.x = GlobalPosition.x;
+            proj.GlobalPosition = pos;
+            GetParent().AddChild (proj);
+            nextFire = elapsedTime + 1f / shotsPerSecond;
         }
 
-        GD.Print ($"Left Bound : {leftBound}  Right Bound : {rightBound}");
+    }
+
+    private void LimitToCorner () {
         if (GlobalPosition.x > rightBound) {
             var position = GlobalPosition;
             position.x = rightBound;
@@ -41,6 +60,13 @@ public class PlayerShip : Area2D {
             position.x = leftBound;
             GlobalPosition = position;
         }
+    }
 
+    private void MoveShip (float moveAmount) {
+        if (Input.IsActionPressed ("left")) {
+            Translate (new Vector2 (-moveAmount, 0));
+        } else if (Input.IsActionPressed ("right")) {
+            Translate (new Vector2 (moveAmount, 0));
+        }
     }
 }

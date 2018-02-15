@@ -12,5 +12,9 @@ public class Projectile : Area2D {
 
     public override void _Process (float delta) {
         Translate (new Vector2 (0, -speed * delta));
+
+        if(GlobalPosition.y < 0) {
+            GetParent().RemoveChild(this);
+        }
     }
 }
