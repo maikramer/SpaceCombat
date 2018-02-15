@@ -2,7 +2,7 @@ using Godot;
 
 namespace MkGames {
     public class Timer : Node {
-        public delegate void CallbackDelegate ();
+
         public event CallbackDelegate OnCounterFinished;
         public event CallbackDelegate OnSecondElapsed;
         public bool CounterFinished = false;
@@ -65,4 +65,6 @@ namespace MkGames {
         }
 
     }
+    
+    public delegate void CallbackDelegate ();
 }

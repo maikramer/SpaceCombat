@@ -14,10 +14,10 @@ public class PlayerShip : Area2D {
     private MkGames.Timer verifyFileModTimer;
 
     public override void _Ready () {
-        verifyFileModTimer = new MkGames.Timer(this, 1);
+        verifyFileModTimer = new MkGames.Timer (this, 1);
         InitSettings ();
-        verifyFileModTimer.OnCounterFinished += Teste;
-        verifyFileModTimer.Start();
+        verifyFileModTimer.OnCounterFinished += TestSettingsChanges;
+        verifyFileModTimer.Start ();
 
         var sprite = FindNode ("Sprite") as Sprite;
         if (sprite != null) {
@@ -35,10 +35,18 @@ public class PlayerShip : Area2D {
             GD.Print ("Projetil invalido");
         }
     }
-
-private void Teste() {
-    GD.Print("Teste");
-}
+    private int psLastMod = 0;
+    private void TestSettingsChanges () {
+        using (File fl = new File ()) {
+            string path = "user://playerSettings.json";
+            int mod = fl.GetModifiedTime(path);
+            if (mod > psLastMod) {
+                InitSettings();
+                psLastMod = mod;
+            }
+        }
+    }
+    
     private void InitSettings () {
         using (File fl = new File ()) {
             string path = "user://playerSettings.json";
@@ -58,9 +66,8 @@ private void Teste() {
 
     private float nextFire = 0;
     private float elapsedTime = 0;
-    private int psLastMod = 0;
     public override void _Process (float delta) {
-        
+
         elapsedTime += delta;
 
         float moveAmount = moveSpeed * delta;
@@ -103,7 +110,7 @@ private void Teste() {
     }
 }
 
-struct PlayerSettings {
-    public float moveSpeed;
-    public float shotsPerSecond;
+class PlayerSettings {
+    public float moveSpeed = 200f;
+    public float shotsPerSecond = 2;
 }
