@@ -1,0 +1,24 @@
+[remap]
+
+importer="wav"
+type="AudioStreamSample"
+path="res://.import/InvaderHit.wav-059e6e26a0b521a09357d991ef166f31.sample"
+
+[deps]
+
+source_file="res://samples/InvaderHit.wav"
+source_md5="f98613474b7d9e51c626102d34c9915e"
+
+dest_files=[ "res://.import/InvaderHit.wav-059e6e26a0b521a09357d991ef166f31.sample" ]
+dest_md5="db1d28e94019a76e1bb4cbe760cab9c1"
+
+[params]
+
+force/8_bit=false
+force/mono=false
+force/max_rate=false
+force/max_rate_hz=44100
+edit/trim=true
+edit/normalize=true
+edit/loop=false
+compress/mode=0

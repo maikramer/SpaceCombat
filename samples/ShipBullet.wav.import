@@ -1,0 +1,24 @@
+[remap]
+
+importer="wav"
+type="AudioStreamSample"
+path="res://.import/ShipBullet.wav-df4d71d07de521ddde7f92b62c41f193.sample"
+
+[deps]
+
+source_file="res://samples/ShipBullet.wav"
+source_md5="e8377265e0048694f2f59ea6e22f4562"
+
+dest_files=[ "res://.import/ShipBullet.wav-df4d71d07de521ddde7f92b62c41f193.sample" ]
+dest_md5="7b350e8ab949fbb6455fa5d6d60d76af"
+
+[params]
+
+force/8_bit=false
+force/mono=false
+force/max_rate=false
+force/max_rate_hz=44100
+edit/trim=true
+edit/normalize=true
+edit/loop=false
+compress/mode=0

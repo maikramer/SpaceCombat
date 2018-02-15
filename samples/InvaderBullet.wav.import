@@ -1,0 +1,24 @@
+[remap]
+
+importer="wav"
+type="AudioStreamSample"
+path="res://.import/InvaderBullet.wav-8e37f62979bf61a0664b5f9d97e07a3b.sample"
+
+[deps]
+
+source_file="res://samples/InvaderBullet.wav"
+source_md5="c2f0a3cb3f2fc247dd8abb15e8c52e09"
+
+dest_files=[ "res://.import/InvaderBullet.wav-8e37f62979bf61a0664b5f9d97e07a3b.sample" ]
+dest_md5="1ba10050343d15c7877bbe7b116b79be"
+
+[params]
+
+force/8_bit=false
+force/mono=false
+force/max_rate=false
+force/max_rate_hz=44100
+edit/trim=true
+edit/normalize=true
+edit/loop=false
+compress/mode=0
