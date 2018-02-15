@@ -9,6 +9,17 @@
             "command": "cd ${workspaceRoot} && ~/Godot/godot",
             "isBackground": true,
             "problemMatcher": []
+        },
+        {
+            "label": "Build Game",
+            "type": "shell",
+            "command": "cd ${workspaceRoot} && msbuild",
+            "isBackground": true,
+            "problemMatcher": [],
+            "group": {
+                "kind": "build",
+                "isDefault": true
+            }
         }
     ]
 }

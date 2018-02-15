@@ -1,5 +1,6 @@
 using System;
 using Godot;
+using Newtonsoft.Json;
 
 public class PlayerShip : Area2D {
     [Export] private float moveSpeed = 200f;
@@ -9,8 +10,15 @@ public class PlayerShip : Area2D {
     private Vector2 shipSize;
     private float leftBound;
     private float rightBound;
+    private PlayerSettings playerSettings;
+    private MkGames.Timer verifyFileModTimer;
 
     public override void _Ready () {
+        verifyFileModTimer = new MkGames.Timer(this, 1);
+        InitSettings ();
+        verifyFileModTimer.OnCounterFinished += Teste;
+        verifyFileModTimer.Start();
+
         var sprite = FindNode ("Sprite") as Sprite;
         if (sprite != null) {
             shipSize = sprite.GetTexture ().GetSize () * sprite.Scale;
@@ -28,9 +36,31 @@ public class PlayerShip : Area2D {
         }
     }
 
+private void Teste() {
+    GD.Print("Teste");
+}
+    private void InitSettings () {
+        using (File fl = new File ()) {
+            string path = "user://playerSettings.json";
+            if (fl.FileExists (path)) {
+                fl.Open (path, (int) File.ModeFlags.Read);
+                playerSettings = JsonConvert.DeserializeObject<PlayerSettings> (fl.GetAsText ());
+                moveSpeed = playerSettings.moveSpeed;
+                shotsPerSecond = playerSettings.shotsPerSecond;
+            } else {
+                fl.Open (path, (int) File.ModeFlags.Write);
+                playerSettings.moveSpeed = moveSpeed;
+                playerSettings.shotsPerSecond = shotsPerSecond;
+                fl.StoreString (JsonConvert.SerializeObject (playerSettings));
+            }
+        }
+    }
+
     private float nextFire = 0;
     private float elapsedTime = 0;
+    private int psLastMod = 0;
     public override void _Process (float delta) {
+        
         elapsedTime += delta;
 
         float moveAmount = moveSpeed * delta;
@@ -71,4 +101,9 @@ public class PlayerShip : Area2D {
             Translate (new Vector2 (moveAmount, 0));
         }
     }
+}
+
+struct PlayerSettings {
+    public float moveSpeed;
+    public float shotsPerSecond;
 }
