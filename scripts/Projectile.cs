@@ -5,8 +5,6 @@ public class Projectile : Area2D {
     [Export] private float speed = 200f;
 
     public override void _Ready () {
-        // Called every time the node is added to the scene.
-        // Initialization here
 
     }
 

@@ -65,6 +65,6 @@ namespace MkGames {
         }
 
     }
-    
+
     public delegate void CallbackDelegate ();
 }

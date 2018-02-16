@@ -28,8 +28,9 @@ namespace MkGames {
                     fl.StoreString (JsonConvert.SerializeObject (m_object));
                 }
             }
-            Name = "SaveSystem " + typeof(T);
+            Name = "SaveSystem " + typeof (T);
             attachToNode.AddChild (this);
+
         }
 
         public override void _Ready () {
@@ -39,11 +40,11 @@ namespace MkGames {
         }
 
         public override void _Process (float delta) {
-            if(delta * 1000 > 1)
+            if (delta * 1000 > 1)
                 m_time = (int) (m_time + delta * 1000);
             else
                 m_time++;
-                
+
             if (m_time - m_lastUpdate > m_updatePeriod) {
                 using (File fl = new File ()) {
                     var mod = fl.GetModifiedTime (m_path);

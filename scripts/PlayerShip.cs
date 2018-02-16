@@ -1,17 +1,20 @@
-using System;
 using Godot;
-using Newtonsoft.Json;
+using MkGames;
 
 public class PlayerShip : Area2D {
     [Export] private PackedScene projectile;
-
     private Vector2 shipSize;
     private float leftBound;
     private float rightBound;
-    private PlayerSettings playerSettings = new PlayerSettings ();
+    private GameParameters m_gameParameters;
 
     public override void _Ready () {
-        var s = new MkGames.SaveSystem<PlayerSettings> ("playerSettings", ref playerSettings, this);
+        GameManager gameManager = GetNode("/root").FindClass<GameManager>();
+        if (gameManager == null) {
+            GD.Print("Erro, gameManager nao encontrado");
+        } else {
+            m_gameParameters = gameManager.GameParameters;
+        }
 
         var sprite = FindNode ("Sprite") as Sprite;
         if (sprite != null) {
@@ -34,7 +37,7 @@ public class PlayerShip : Area2D {
 
         elapsedTime += delta;
 
-        float moveAmount = playerSettings.moveSpeed * delta;
+        float moveAmount = m_gameParameters.character.moveSpeed * delta;
         MoveShip (moveAmount);
 
         LimitToCorner ();
@@ -49,7 +52,7 @@ public class PlayerShip : Area2D {
             pos.y = Position.y - shipSize.y / 2f;
             pos.x = Position.x;
             proj.Position = pos;
-            nextFire = elapsedTime + 1f / playerSettings.shotsPerSecond;
+            nextFire = elapsedTime + 1f / m_gameParameters.character.shotsPerSecond;
         }
     }
 
@@ -74,7 +77,3 @@ public class PlayerShip : Area2D {
     }
 }
 
-class PlayerSettings {
-    public float moveSpeed = 200f;
-    public float shotsPerSecond = 2;
-}

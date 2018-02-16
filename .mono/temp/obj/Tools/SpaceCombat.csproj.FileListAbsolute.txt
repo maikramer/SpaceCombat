@@ -1,8 +1,0 @@
-/home/maikeu/MeusGames/SpaceCombat/.mono/temp/bin/Tools/SpaceCombat.dll
-/home/maikeu/MeusGames/SpaceCombat/.mono/temp/bin/Tools/SpaceCombat.pdb
-/home/maikeu/MeusGames/SpaceCombat/.mono/temp/obj/Tools/SpaceCombat.csprojResolveAssemblyReference.cache
-/home/maikeu/MeusGames/SpaceCombat/.mono/temp/obj/Tools/SpaceCombat.csproj.CoreCompileInputs.cache
-/home/maikeu/MeusGames/SpaceCombat/.mono/temp/obj/Tools/SpaceCombat.dll
-/home/maikeu/MeusGames/SpaceCombat/.mono/temp/obj/Tools/SpaceCombat.pdb
-/home/maikeu/MeusGames/SpaceCombat/.mono/temp/bin/Tools/Newtonsoft.Json.dll
-/home/maikeu/MeusGames/SpaceCombat/.mono/temp/bin/Tools/Newtonsoft.Json.xml
