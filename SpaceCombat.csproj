@@ -53,6 +53,7 @@
     <Compile Include="scripts\PlayerShip.cs" />
     <Compile Include="scripts\Projectile.cs" />
     <Compile Include="scripts\Timer.cs" />
+    <Compile Include="scripts\SaveSystem.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <Choose>

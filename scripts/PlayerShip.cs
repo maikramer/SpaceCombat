@@ -3,21 +3,15 @@ using Godot;
 using Newtonsoft.Json;
 
 public class PlayerShip : Area2D {
-    [Export] private float moveSpeed = 200f;
     [Export] private PackedScene projectile;
-    [Export] private float shotsPerSecond = 2;
 
     private Vector2 shipSize;
     private float leftBound;
     private float rightBound;
-    private PlayerSettings playerSettings;
-    private MkGames.Timer verifyFileModTimer;
+    private PlayerSettings playerSettings = new PlayerSettings ();
 
     public override void _Ready () {
-        verifyFileModTimer = new MkGames.Timer (this, 1);
-        InitSettings ();
-        verifyFileModTimer.OnCounterFinished += TestSettingsChanges;
-        verifyFileModTimer.Start ();
+        var s = new MkGames.SaveSystem<PlayerSettings> ("playerSettings", ref playerSettings, this);
 
         var sprite = FindNode ("Sprite") as Sprite;
         if (sprite != null) {
@@ -26,41 +20,11 @@ public class PlayerShip : Area2D {
             GD.Print ($"O componente {nameof(sprite)} nao foi encontrado");
         }
 
-        GD.Print ("Ship Size : " + shipSize);
-
         leftBound = shipSize.x / 2;
         rightBound = GetViewportRect ().Size.x - shipSize.x / 2;
 
         if (!(projectile.Instance () is Node2D)) {
             GD.Print ("Projetil invalido");
-        }
-    }
-    private int psLastMod = 0;
-    private void TestSettingsChanges () {
-        using (File fl = new File ()) {
-            string path = "user://playerSettings.json";
-            int mod = fl.GetModifiedTime(path);
-            if (mod > psLastMod) {
-                InitSettings();
-                psLastMod = mod;
-            }
-        }
-    }
-    
-    private void InitSettings () {
-        using (File fl = new File ()) {
-            string path = "user://playerSettings.json";
-            if (fl.FileExists (path)) {
-                fl.Open (path, (int) File.ModeFlags.Read);
-                playerSettings = JsonConvert.DeserializeObject<PlayerSettings> (fl.GetAsText ());
-                moveSpeed = playerSettings.moveSpeed;
-                shotsPerSecond = playerSettings.shotsPerSecond;
-            } else {
-                fl.Open (path, (int) File.ModeFlags.Write);
-                playerSettings.moveSpeed = moveSpeed;
-                playerSettings.shotsPerSecond = shotsPerSecond;
-                fl.StoreString (JsonConvert.SerializeObject (playerSettings));
-            }
         }
     }
 
@@ -70,7 +34,7 @@ public class PlayerShip : Area2D {
 
         elapsedTime += delta;
 
-        float moveAmount = moveSpeed * delta;
+        float moveAmount = playerSettings.moveSpeed * delta;
         MoveShip (moveAmount);
 
         LimitToCorner ();
@@ -85,7 +49,7 @@ public class PlayerShip : Area2D {
             pos.y = Position.y - shipSize.y / 2f;
             pos.x = Position.x;
             proj.Position = pos;
-            nextFire = elapsedTime + 1f / shotsPerSecond;
+            nextFire = elapsedTime + 1f / playerSettings.shotsPerSecond;
         }
     }
 

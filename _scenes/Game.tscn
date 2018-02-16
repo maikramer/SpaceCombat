@@ -27,9 +27,7 @@ audio_bus_override = false
 audio_bus_name = "Master"
 script = ExtResource( 2 )
 _sections_unfolded = [ "Transform", "Z Index" ]
-moveSpeed = 200.0
 projectile = ExtResource( 3 )
-shotsPerSecond = 2.0
 
 [node name="Sprite" type="Sprite" parent="PlayerShip" index="0"]
 
