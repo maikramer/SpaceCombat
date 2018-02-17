@@ -7,11 +7,12 @@ public class PlayerShip : Area2D {
     private float leftBound;
     private float rightBound;
     private GameParameters m_gameParameters;
+    private GameManager gameManager;
 
     public override void _Ready () {
-        GameManager gameManager = GetNode("/root").FindClass<GameManager>();
+        gameManager = GetNode ("/root").FindClass<GameManager> ();
         if (gameManager == null) {
-            GD.Print("Erro, gameManager nao encontrado");
+            GD.Print ("Erro, gameManager nao encontrado");
         } else {
             m_gameParameters = gameManager.GameParameters;
         }
@@ -45,15 +46,18 @@ public class PlayerShip : Area2D {
     }
 
     private void FireWeapon () {
-        if (Input.IsActionPressed ("fire") && elapsedTime > nextFire) {
-            var proj = projectile.Instance () as Node2D;
-            GetParent ().AddChild (proj);
-            var pos = proj.Position;
-            pos.y = Position.y - shipSize.y / 2f;
-            pos.x = Position.x;
-            proj.Position = pos;
-            nextFire = elapsedTime + 1f / m_gameParameters.character.shotsPerSecond;
-        }
+        var projectileCount = GetTree ().GetNodesInGroup (gameManager.projectileGroup).Length;
+        var maxShots = m_gameParameters.character.maxShots;
+        if (projectileCount < maxShots)
+            if (Input.IsActionPressed ("fire") && elapsedTime > nextFire) {
+                var proj = projectile.Instance () as Node2D;
+                GetParent ().AddChild (proj);
+                var pos = proj.Position;
+                pos.y = Position.y - shipSize.y / 2f;
+                pos.x = Position.x;
+                proj.Position = pos;
+                nextFire = elapsedTime + 1f / m_gameParameters.character.shotsPerSecond;
+            }
     }
 
     private void LimitToCorner () {
@@ -76,4 +80,3 @@ public class PlayerShip : Area2D {
         }
     }
 }
-

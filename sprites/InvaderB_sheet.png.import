@@ -10,7 +10,7 @@ source_file="res://sprites/InvaderB_sheet.png"
 source_md5="2893cf0d7bed17023e6c0ab2e1a010c3"
 
 dest_files=[ "res://.import/InvaderB_sheet.png-3632559db7876d3a48207d0411bd4c07.stex" ]
-dest_md5="ee331e134abf0d016f3571aa1f1f48fe"
+dest_md5="1fff4596a1f8e48c8d47c0b7cdc22ba3"
 
 [params]
 
@@ -19,7 +19,7 @@ compress/lossy_quality=0.7
 compress/hdr_mode=0
 compress/normal_map=0
 flags/repeat=0
-flags/filter=true
+flags/filter=false
 flags/mipmaps=false
 flags/anisotropic=false
 flags/srgb=2

@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/InvaderC_sheet.png-b136ed81c887326a8134d54b8942ff29.stex"
+path="res://.import/bg3.png-26c9ec3ea7f9c3ea25ba7ef52969c323.stex"
 
 [deps]
 
-source_file="res://sprites/InvaderC_sheet.png"
-source_md5="b3d4259345aa3f982d890ae9aa8fc16e"
+source_file="res://sprites/HiDPI/bg3.png"
+source_md5="ed17c71fc2cea57f24f356c3c51c8a12"
 
-dest_files=[ "res://.import/InvaderC_sheet.png-b136ed81c887326a8134d54b8942ff29.stex" ]
-dest_md5="18295b63b718e6991e23dfd0882ff96b"
+dest_files=[ "res://.import/bg3.png-26c9ec3ea7f9c3ea25ba7ef52969c323.stex" ]
+dest_md5="2c21c1d617e8b7f685a676290619d3ba"
 
 [params]
 
@@ -19,7 +19,7 @@ compress/lossy_quality=0.7
 compress/hdr_mode=0
 compress/normal_map=0
 flags/repeat=0
-flags/filter=false
+flags/filter=true
 flags/mipmaps=false
 flags/anisotropic=false
 flags/srgb=2

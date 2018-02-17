@@ -3,11 +3,13 @@ using Newtonsoft.Json;
 
 namespace MkGames {
     public class SaveSystem<T> : Node {
+        private const int UPDATE_PERIOD = 200;
+        
         private T m_object;
         private string m_path;
-        private int m_time;
-        private int m_lastUpdate;
-        private int m_updatePeriod = 200; //Em ms
+        private long m_time;
+        private long m_lastUpdate;
+        private int m_updatePeriod = UPDATE_PERIOD; //Em ms
         private int m_lastMod;
         public SaveSystem (string fileName, ref T obj, Node attachToNode) {
             if (!System.Text.RegularExpressions.Regex.IsMatch (fileName, @"^[a-zA-Z0-9_]+$")) {

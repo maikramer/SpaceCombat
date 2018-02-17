@@ -7,10 +7,10 @@ path="res://.import/rocket.png-8f296679e62556eeb09e19d30549cce3.stex"
 [deps]
 
 source_file="res://sprites/HiDPI/rocket.png"
-source_md5="53e086db297f12bf0c3010e6a3432aa4"
+source_md5="f9f9fa4ac3ca671e40790eddca379ce4"
 
 dest_files=[ "res://.import/rocket.png-8f296679e62556eeb09e19d30549cce3.stex" ]
-dest_md5="03961c5619879669bd062aa22d6d95a0"
+dest_md5="922088e9d49c5943cf1e7c26b3658964"
 
 [params]
 
@@ -19,7 +19,7 @@ compress/lossy_quality=0.7
 compress/hdr_mode=0
 compress/normal_map=0
 flags/repeat=0
-flags/filter=true
+flags/filter=false
 flags/mipmaps=false
 flags/anisotropic=false
 flags/srgb=2
