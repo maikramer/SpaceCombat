@@ -42,7 +42,7 @@ public class PlayerShip : Area2D {
     }
 
     private void FireWeapon () {
-        var projectileCount = GetTree ().GetNodesInGroup (gameManager.projectileGroup).Length;
+        var projectileCount = GetTree ().GetNodesInGroup (m_gameParameters.enemy.projectileGroup).Length;
         var maxShots = m_gameParameters.character.maxShots;
         if (projectileCount < maxShots)
             if (Input.IsActionPressed ("fire") && elapsedTime > nextFire) {

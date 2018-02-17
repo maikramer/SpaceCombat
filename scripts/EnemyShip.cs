@@ -5,12 +5,12 @@ using MkGames;
 public class EnemyShip : Area2D {
     [Export (hint: PropertyHint.Range, hintString: "0,100")] public int enemyType = 0;
     private GameManager gameManager;
-    private EnemyParameters m_EnemyParameters;
+    private GameParameters m_GameParameters;
     public override void _Ready () {
         gameManager = GameManager.GetInstance (this);
-        m_EnemyParameters = gameManager.EnemyParameters;
+        m_GameParameters = gameManager.GameParameters;
 
-        var textures = m_EnemyParameters.textureResources;
+        var textures = m_GameParameters.enemy.textureResources;
         var sprite = GetNode (nameof (Sprite)) as Sprite;
         Texture image;
         if (enemyType >= textures.Length) {

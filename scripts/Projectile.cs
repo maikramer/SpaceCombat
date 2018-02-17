@@ -8,7 +8,7 @@ public class Projectile : Area2D {
 
     public override void _Ready () {
         gameManager = GetNode ("/root").FindClass<GameManager> ();
-        AddToGroup(gameManager.projectileGroup);
+        AddToGroup(gameManager.GameParameters.enemy.projectileGroup);
     }
 
     public override void _Process (float delta) {
