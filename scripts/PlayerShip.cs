@@ -10,12 +10,8 @@ public class PlayerShip : Area2D {
     private GameManager gameManager;
 
     public override void _Ready () {
-        gameManager = GetNode ("/root").FindClass<GameManager> ();
-        if (gameManager == null) {
-            GD.Print ("Erro, gameManager nao encontrado");
-        } else {
-            m_gameParameters = gameManager.GameParameters;
-        }
+        gameManager = GameManager.GetInstance(this);
+        m_gameParameters = gameManager.GameParameters;
 
         var sprite = FindNode ("Sprite") as Sprite;
         if (sprite != null) {

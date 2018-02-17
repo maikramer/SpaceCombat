@@ -50,6 +50,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="scripts\EnemyShip.cs" />
     <Compile Include="scripts\EnemySpawner.cs" />
     <Compile Include="scripts\GameManager.cs" />
     <Compile Include="scripts\PlayerShip.cs" />

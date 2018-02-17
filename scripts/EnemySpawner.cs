@@ -2,17 +2,17 @@ using System;
 using Godot;
 
 public class EnemySpawner : Node2D {
-    [Export] PackedScene enemy1_PS;
-    [Export] PackedScene enemy2_PS;
-    [Export] PackedScene enemy3_PS;
+    [Export] PackedScene enemyPS;
 
     public override void _Ready () {
-        PackedScene[] enemiesArray = { enemy1_PS, enemy2_PS, enemy3_PS };
+        var gameManager = GameManager.GetInstance (this);
+        var m_EnemyParameters = gameManager.EnemyParameters;
         Random rng = new Random (DateTime.Now.Second);
         var placeHolders = GetChildren ();
         Color[] possibleColors = GetColorsArray (placeHolders.Length);
         for (var i = 0; i < placeHolders.Length; i++) {
-            var enemy = enemiesArray[rng.Next (enemiesArray.Length)].Instance ();
+            var enemy = enemyPS.Instance () as EnemyShip;
+            enemy.enemyType = rng.Next(m_EnemyParameters.GetTypesCount());
             var enemySprite = enemy.FindNode ("Sprite") as Sprite;
             if (enemySprite == null) {
                 GD.Print ("Sprite nao encontrado em inimigo " + enemy.Name);
