@@ -52,7 +52,6 @@ script = ExtResource( 5 )
 
 [node name="Enemy Spawner" type="Node2D" parent="." index="3"]
 
-editor/display_folded = true
 position = Vector2( 225, 100 )
 script = ExtResource( 6 )
 _sections_unfolded = [ "Transform" ]

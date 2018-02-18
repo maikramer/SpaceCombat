@@ -11,6 +11,17 @@ public sealed class GameManager : Node {
         var s = new SaveSystem<GameParameters> (nameof (GameParameters), ref m_gameParameters, this);
     }
 
+    public override void _Process (float delta) {
+        if (GetTree ().GetNodesInGroup (m_gameParameters.enemy.enemyGroup).Length == 0) {
+            WinGame ();
+        }
+    }
+
+    private void WinGame () {
+        GD.Print ("VITORIA!!");
+        SetProcess (false);
+    }
+
     public static GameManager GetInstance (Node nodeInTree) {
         var gameManager = nodeInTree.GetNode ("/root").FindClass<GameManager> ();
         if (gameManager == null) {
@@ -22,22 +33,22 @@ public sealed class GameManager : Node {
 
 public class GameParameters {
     public Character character = new Character ();
-    public Enemy enemy = new Enemy();
+    public Enemy enemy = new Enemy ();
     public GameParameters () {
         character.moveSpeed = 200f;
         character.shotsPerSecond = 2;
         character.maxShots = 3;
 
-
     }
     public class Character {
+        public readonly string projectileGroup = nameof (projectileGroup);
         public float moveSpeed;
         public float shotsPerSecond;
         public int maxShots;
     }
 
     public class Enemy {
-        public readonly string projectileGroup = nameof (projectileGroup);
+        public readonly string enemyGroup = nameof (enemyGroup);
         public string[] textureResources = new string[10];
 
         public int GetTypesCount () {

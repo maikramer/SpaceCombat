@@ -8,7 +8,8 @@ public class Projectile : Area2D {
 
     public override void _Ready () {
         gameManager = GetNode ("/root").FindClass<GameManager> ();
-        AddToGroup(gameManager.GameParameters.enemy.projectileGroup);
+        AddToGroup (gameManager.GameParameters.character.projectileGroup);
+        Connect ("area_entered", this, nameof (OnAreaEntered));
     }
 
     public override void _Process (float delta) {
@@ -17,5 +18,13 @@ public class Projectile : Area2D {
         if (GlobalPosition.y < 0) {
             this.QueueFree ();
         }
+    }
+
+    public void OnAreaEntered (Godot.Object obj) {
+        if (obj is EnemyShip) {
+            ((EnemyShip) obj).Destroy ();
+            QueueFree();
+        }
+
     }
 }
