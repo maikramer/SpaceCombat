@@ -1,0 +1,1 @@
+{"character":{"projectileGroup":"projectileGroup","moveSpeed":1000.0,"shotsPerSecond":2.0,"maxShots":3},"enemy":{"enemyGroup":"enemyGroup","textureResources":["res://sprites/InvaderA_sheet.png","res://sprites/InvaderB_sheet.png",null,null,null,null,null,null,null]}}
